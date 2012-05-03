@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>GettingStarted</title>
+
+    <% is_bb6 = System::get_property('platform') == 'Blackberry' && (System::get_property('os_version').split('.')[0].to_i >= 6) %>
+
+    <% if is_bb6 %>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <% else %>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <% end %>
+
+    <% if System::get_property('platform') == 'WP7' %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <% end %>
+    
+	<link type="text/css" rel="stylesheet" href="/public/css-debug/sencha-touch.css"/>
+	<script type="text/javascript" charset="utf-8" src="/public/sencha/sencha-touch-all-debug.js"></script>
+
+    <% if System::get_property('platform') == 'APPLE' %>
+        <link href="/public/css-debug/iphone.css" type="text/css" rel="stylesheet"/>
+    <% elsif System::get_property('platform') == 'ANDROID' %>
+        <link href="/public/css-debug/android.css" type="text/css" rel="stylesheet"/>
+    <% elsif is_bb6 %>
+        <link href="/public/css-debug/bb6.css" type="text/css" rel="stylesheet"/>
+    <% elsif System::get_property('webview_framework') =~ /^WEBKIT/ %>
+        <link href="/public/css-debug/iphone.css" type="text/css" rel="stylesheet"/>    
+    <% end %>
+	
+	<link type="text/css" rel="stylesheet" href="/public/css-debug/app.css"/>
+	<script type="text/javascript" charset="utf-8" src="/public/js/app-debug.js"></script>
+</head>
+
+<body>
+    <%= @content %>
+</body>
+
+</html>
